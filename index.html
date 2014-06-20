@@ -4,6 +4,10 @@
     <title>Angularの練習</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"></script>
     <script src="js/myscript.js"></script>
+    <style>
+        .odd{color: red;}
+        .even{color: blue;}
+    </style>
 </head>
 <body>
     <h1>はじめてのangular js</h1>
@@ -12,9 +16,15 @@
     <p>こんにちは！{{3*8}}</p>
     <div ng-controller="mainCtrl">
         <p>{{users.length}} users</p>
+        <p><input type="text" ng-model="query.name"></p>
         <ul>
-            <li ng-repeat="user in users">
-                {{user.name}} : {{user.score}}
+            <!-- <li ng-repeat="user in users | orderBy : '-score' | limitTo:3"> -->
+            <!-- <li ng-repeat="user in users | filter : query"> -->
+            <!-- <li ng-repeat="user in users" ng-class-even="'even'" ng-class-odd="'odd'"> -->
+            <li ng-repeat="user in users" ng-controller="userItemCtrl">
+                <!-- {{user.name}} : {{user.score}} -->
+                {{$index + 1}} {{$first}} {{$middle}} {{$last}} {{user.name}} : {{user.score}}
+                <button ng-click="increment();">+1</button>
             </li>
         </ul>
     </div>
